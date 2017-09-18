@@ -15,7 +15,7 @@
 Name:              nginx
 Epoch:             1
 Version:           1.10.2
-Release:           1%{?dist}
+Release:           2%{?dist}
 
 Summary:           A high performance web server and reverse proxy server
 Group:             System Environment/Daemons
@@ -429,6 +429,9 @@ fi
 
 
 %changelog
+* Mon Sep 18 2017 Luboš Uhliarik <luhliari@redhat.com> - 1:1.10.2-2
+- Resolves: #1478662 - rebuild for ALPN support
+
 * Mon Oct 31 2016 Jamie Nguyen <jamielinux@fedoraproject.org> - 1:1.10.2-1
 - update to upstream release 1.10.2
 
