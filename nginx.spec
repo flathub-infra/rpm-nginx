@@ -14,8 +14,8 @@
 
 Name:              nginx
 Epoch:             1
-Version:           1.10.2
-Release:           2%{?dist}
+Version:           1.12.2
+Release:           1%{?dist}
 
 Summary:           A high performance web server and reverse proxy server
 Group:             System Environment/Daemons
@@ -172,6 +172,7 @@ Requires:          nginx
 %prep
 %setup -q
 %patch0 -p0
+
 cp %{SOURCE200} .
 cp %{SOURCE210} .
 
@@ -429,6 +430,11 @@ fi
 
 
 %changelog
+* Wed Oct 18 2017 Luboš Uhliarik <luhliari@redhat.com> - 1:1.12.2-1
+- update to upstream release 1.12.2
+- Resolves: #1468584 - (CVE-2017-7529) CVE-2017-7529 nginx: Integer
+  overflow in nginx range filter module leading to memory disclosure
+
 * Mon Sep 18 2017 Luboš Uhliarik <luhliari@redhat.com> - 1:1.10.2-2
 - Resolves: #1478662 - rebuild for ALPN support
 
