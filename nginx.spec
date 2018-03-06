@@ -15,7 +15,7 @@
 Name:              nginx
 Epoch:             1
 Version:           1.12.2
-Release:           1%{?dist}
+Release:           2%{?dist}
 
 Summary:           A high performance web server and reverse proxy server
 Group:             System Environment/Daemons
@@ -208,6 +208,7 @@ export DESTDIR=%{buildroot}
     --with-file-aio \
 %endif
     --with-ipv6 \
+    --with-http_auth_request_module \
     --with-http_ssl_module \
     --with-http_v2_module \
     --with-http_realip_module \
@@ -430,6 +431,9 @@ fi
 
 
 %changelog
+* Tue Mar 6 2018 Tadej Janež <tadej.j@nez.si> - 1:1.12.2-2
+- enable building the ngx_http_auth_request_module module (RHBZ #1471107)
+
 * Wed Oct 18 2017 Luboš Uhliarik <luhliari@redhat.com> - 1:1.12.2-1
 - update to upstream release 1.12.2
 - Resolves: #1468584 - (CVE-2017-7529) CVE-2017-7529 nginx: Integer
