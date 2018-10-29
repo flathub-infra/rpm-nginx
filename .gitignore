@@ -6,3 +6,4 @@ x86_64/
 *.rpm
 /nginx-*.tar.gz
 /nginx-*.tar.gz.asc
+/ngx_cache_purge-*.tar.gz

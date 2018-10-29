@@ -15,7 +15,7 @@
 Name:              nginx
 Epoch:             1
 Version:           1.12.2
-Release:           2%{?dist}
+Release:           2%{?dist}.flathub.1
 
 Summary:           A high performance web server and reverse proxy server
 Group:             System Environment/Daemons
@@ -38,6 +38,10 @@ Source103:         404.html
 Source104:         50x.html
 Source200:         README.dynamic
 Source210:         UPGRADE-NOTES-1.6-to-1.10
+
+# Add the cache_purge module we want in Flathub
+Source1000000:     http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz
+Patch1000000:      ngx_cache_purge.compatibility.patch
 
 # removes -Werror in upstream build scripts.  -Werror conflicts with
 # -D_FORTIFY_SOURCE=2 causing warnings to turn into errors.
@@ -171,6 +175,7 @@ Requires:          nginx
 
 %prep
 %setup -q
+%setup -T -D -a 1000000
 %patch0 -p0
 
 cp %{SOURCE200} .
@@ -204,6 +209,7 @@ export DESTDIR=%{buildroot}
     --lock-path=/run/lock/subsys/nginx \
     --user=%{nginx_user} \
     --group=%{nginx_user} \
+    --add-module=ngx_cache_purge-2.3 \
 %if 0%{?with_aio}
     --with-file-aio \
 %endif
@@ -431,6 +437,9 @@ fi
 
 
 %changelog
+* Mon Oct 29 2018 Mathieu Bridon <bochecha@daitauha.fr> - 1:1.12.2-2.flathub.1
+- Add the third-party cache_purge module for Flathub.
+
 * Tue Mar 6 2018 Tadej Janež <tadej.j@nez.si> - 1:1.12.2-2
 - enable building the ngx_http_auth_request_module module (RHBZ #1471107)
 
