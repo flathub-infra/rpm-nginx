@@ -15,7 +15,7 @@
 Name:              nginx
 Epoch:             1
 Version:           1.12.2
-Release:           2%{?dist}.flathub.1
+Release:           2%{?dist}.flathub.2
 
 Summary:           A high performance web server and reverse proxy server
 Group:             System Environment/Daemons
@@ -186,6 +186,7 @@ sed -i -e 's#KillMode=.*#KillMode=process#g' %{SOURCE10}
 sed -i -e 's#PROFILE=SYSTEM#HIGH:!aNULL:!MD5#' %{SOURCE12}
 %endif
 
+%patch1000000 -p1 -d ngx_cache_purge-2.3
 
 %build
 # nginx does not utilize a standard configure script.  It has its own
@@ -437,6 +438,9 @@ fi
 
 
 %changelog
+* Mon Oct 29 2018 Mathieu Bridon <bochecha@daitauha.fr> - 1:1.12.2-2.flathub.2
+- Actually apply the patch.
+
 * Mon Oct 29 2018 Mathieu Bridon <bochecha@daitauha.fr> - 1:1.12.2-2.flathub.1
 - Add the third-party cache_purge module for Flathub.
 
